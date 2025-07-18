@@ -1,177 +1,175 @@
 /* common.css - 九州集团子域通用样式 */
 
-/* 全局基础样式 */
+/* CSS 变量定义：统一色彩板 */
+:root {
+    /* 通用基础色 */
+    --color-primary-text: rgba(255,255,255,0.85); /* 主要文字色，白灰色 */
+    --color-secondary-text: rgba(255,255,255,0.7); /* 次要文字色 */
+    --color-faded-text: rgba(255,255,255,0.5);   /* 淡化文字色 */
+    --color-dark-bg: #282828; /* 通用深色背景 */
+    --color-dark-section-bg: rgba(0,0,0,0.25); /* 通用深色区块背景 */
+    --color-card-bg: rgba(255, 255, 255, 0.03); /* 卡片背景色 */
+    --color-border-light: rgba(255, 255, 255, 0.1); /* 轻边框颜色 */
+    --color-border-accent-default: #EAEAEA; /* 默认强调色边框 */
+    --color-footer-bg: #2c3e50; /* 页脚背景色 */
+    --color-footer-border: #34495e; /* 页脚边框色 */
+    --color-footer-item-bg: #3e4a5d; /* 页脚项背景色 */
+    --color-footer-item-hover: #4a5c70; /* 页脚项悬停色 */
+    --color-footer-link: #EAEAEA; /* 页脚链接色 (默认强调色) */
+
+    /* 通用强调色（可根据具体页面主题覆盖） */
+    --color-accent: #EAEAEA; /* 默认强调色，用于通用按钮和标题 */
+
+    /* 子域特定强调色 */
+    --accent-ridou: #EAEAEA;       /* 日斗投资 - 石墨战袍 */
+    --accent-jucai: #FFD700;       /* 聚财众发 - 金叶战袍 */
+    --accent-xianzhi: #F7DC6F;     /* 贤智汇聚 - 秋收战袍 */
+    --accent-xunfeitong: #A8D9F9;  /* 讯飞通 - 蓝调时刻 */
+    --accent-media: #87CEEB;       /* 九州传媒 - 北国战袍 */
+    --accent-sandbox: #85C1E9;     /* 九州沙盘 - 生息版 */
+    --accent-passport: #00BFFF;    /* 通行证 - 统一风格 */
+    --accent-main-galaxy: #8BE9FD; /* 主域星河图的强调色 */
+}
+
+/* 全局基础样式 - 使用变量 */
 body {
-    font-family: 'Inter', 'Noto Serif SC', serif;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.85); /* 默认文字颜色调整为白灰色 */
-    margin: 0;
-    padding: 0;
-    background-color: #282828; /* 默认深色背景 */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* 确保页脚在页面底部 */
-    overflow-x: hidden; /* 防止水平滚动条 */
+    color: var(--color-primary-text);
+    background-color: var(--color-dark-bg);
     /* Antialiased 字体平滑处理 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* 通用布局容器 */
+/* 统一字体大小和字重规范 */
+h1 { font-size: 2.25rem; font-weight: 700; } /* text-4xl */
+h2 { font-size: 1.875rem; font-weight: 700; } /* text-3xl */
+h3 { font-size: 1.5rem; font-weight: 700; } /* text-2xl */
+h4 { font-size: 1.25rem; font-weight: 700; } /* text-xl */
+p { font-size: 1.125rem; font-weight: 400; } /* text-lg */
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+
+
+/* 通用布局容器 - 使用变量 */
 .container {
-    max-width: 960px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: rgba(0,0,0,0.1); /* 容器背景透明度调整 */
-    border-radius: 8px;
+    background-color: rgba(0,0,0,0.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    flex-grow: 1; /* 内容区域占据剩余空间 */
 }
 
-/* 通用标题样式 */
-h1, h2, h3, h4 {
-    color: #EAEAEA; /* 标题颜色调整 */
-    text-align: center;
-    margin-bottom: 25px;
-}
+/* 通用标题样式 - 使用变量 */
+h1, h2, h3, h4 { color: var(--color-primary-text); }
+p { color: var(--color-secondary-text); }
 
-/* 通用段落样式 */
-p {
-    text-align: center;
-    font-size: 1.1em;
-    color: rgba(255,255,255,0.7); /* 段落文字颜色调整 */
-    margin-bottom: 15px;
-}
+/* 通用强调色 - 使用变量 */
+.text-accent { color: var(--color-accent); }
+.border-accent { border-color: var(--color-accent); }
+.hover-accent:hover { background-color: var(--color-accent); color: var(--color-dark-bg); } /* 悬停颜色反转 */
 
-/* 通用强调色 */
-.text-accent { color: #EAEAEA; }
-.border-accent { border-color: #EAEAEA; }
-.hover-accent:hover { background-color: #EAEAEA; color: #282828; }
+/* 通用背景区块 - 使用变量 */
+.bg-dark-section { background-color: var(--color-dark-section-bg); }
 
-/* 通用背景区块 */
-.bg-dark-section { background-color: rgba(0,0,0,0.25); }
-
-/* 通用淡入动画 */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-
-/* 通用 CTA 按钮 */
+/* 通用 CTA 按钮 - 使用变量 */
 .cta-button {
-    display: block;
-    width: fit-content;
-    margin: 30px auto;
-    padding: 12px 25px;
-    background-color: transparent; /* 默认透明 */
-    border: 1px solid #EAEAEA; /* 边框使用强调色 */
-    color: #EAEAEA;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
-    font-size: 1.05em;
-    font-weight: bold;
-    cursor: pointer;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
 }
-
 .cta-button:hover {
-    background-color: #EAEAEA;
-    color: #282828;
-    transform: translateY(-2px);
+    background-color: var(--color-accent);
+    color: var(--color-dark-bg);
 }
 
-/* 页眉通用样式 */
-header {
-    padding-top: 1rem; /* py-4 */
-    padding-bottom: 1rem; /* py-4 */
-    padding-left: 1rem; /* px-4 */
-    padding-right: 1rem; /* px-4 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
+/* Universal Footer Styles - 使用变量 */
+.universal-footer {
+    background-color: var(--color-footer-bg);
+    border-top: 1px solid var(--color-footer-border);
 }
-header .container {
-    max-width: 960px; /* 与主体容器一致 */
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent; /* 页眉背景透明 */
-    box-shadow: none; /* 页眉无阴影 */
-    padding: 0; /* 移除容器内边距，因为 header 已经有了 padding */
+.universal-footer .footer-title {
+    color: var(--color-accent); /* 页脚标题使用通用强调色 */
 }
-header h1 {
-    font-size: 1.25rem; /* text-xl */
-    font-weight: 700; /* font-bold */
-    text-align: left; /* Logo/Title左对齐 */
-    margin-bottom: 0; /* 移除底部外边距 */
+.universal-footer .portal-item {
+    background-color: var(--color-footer-item-bg);
 }
-header a {
-    font-size: 0.875rem; /* text-sm */
-    color: rgba(255,255,255,0.7); /* text-white/70 */
-    transition: color 0.15s ease; /* transition */
+.universal-footer .portal-item:hover {
+    background-color: var(--color-footer-item-hover);
 }
-header a:hover {
-    color: #EAEAEA; /* hover:text-accent */
+.universal-footer .portal-item a {
+    color: var(--color-footer-link);
+}
+.universal-footer .portal-item a:hover {
+    color: #ffffff; /* 固定白色，确保可见性 */
+}
+.universal-footer .portal-item p {
+    color: var(--color-secondary-text); /* 描述文字使用通用次要文字色 */
+}
+.universal-footer .copyright {
+    color: var(--color-faded-text); /* 版权文字使用通用淡化文字色 */
 }
 
-/* 通用节 (section) 样式 */
-section {
-    padding-top: 4rem; /* py-16 */
-    padding-bottom: 4rem; /* py-16 */
-}
-section.min-h-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-section .max-w-4xl { max-width: 56rem; }
-section .max-w-6xl { max-width: 72rem; }
-section .max-w-5xl { max-width: 64rem; }
-section .max-w-3xl { max-width: 48rem; }
-section .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-section .sm\:px-8 { padding-left: 2rem; padding-right: 2rem; }
-section .text-white { color: #fff; }
-section .my-4 { margin-top: 1rem; margin-bottom: 1rem; }
-section .mt-6 { margin-top: 1.5rem; }
-section .mt-10 { margin-top: 2.5rem; }
-section .mb-12 { margin-bottom: 3rem; }
-section .mb-4 { margin-bottom: 1rem; }
-section .mb-8 { margin-bottom: 2rem; }
-section .mb-10 { margin-bottom: 2.5rem; }
-section .gap-8 { gap: 2rem; }
-section .md\:gap-12 { gap: 3rem; }
-section .border-l-4 { border-left-width: 4px; }
-section .pl-4 { padding-left: 1rem; }
-section .mb-4 { margin-bottom: 1rem; }
-section .w-32 { width: 8rem; }
-section .h-32 { height: 8rem; }
-section .bg-white\/90 { background-color: rgba(255, 255, 255, 0.9); }
-section .p-2 { padding: 0.5rem; }
-section .rounded-lg { border-radius: 0.5rem; }
-section .text-black { color: #000; }
-section .mb-3 { margin-bottom: 0.75rem; }
-section .break-all { word-break: break-all; }
-section .inline-flex { display: inline-flex; }
-section .justify-center { justify-content: center; }
-section .gap-2 { gap: 0.5rem; }
-section .text-white\/60 { color: rgba(255, 255, 255, 0.6); }
-section .hover\:underline:hover { text-decoration-line: underline; }
-section .self-start { align-self: flex-start; }
-section .sm\:self-center { align-self: center; }
-section .flex-shrink-0 { flex-shrink: 0; }
-
-
-/* 通用网格布局 */
+/* Tailwind CSS 兼容性类 (确保已有的tailwind类继续工作) */
+.antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.min-h-screen { min-height: 100vh; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.absolute { position: absolute; }
+.top-0 { top: 0; }
+.left-0 { left: 0; }
+.w-full { width: 100%; }
+.z-10 { z-index: 10; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.justify-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.text-center { text-align: center; }
+.bg-black\/30 { background-color: rgba(0, 0, 0, 0.3); }
+.max-w-4xl { max-width: 56rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-10 { margin-top: 2.5rem; }
+.inline-block { display: inline-block; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.px-12 { padding-left: 3rem; padding-right: 3rem; }
 .grid { display: grid; }
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.gap-8 { gap: 2rem; }
+.text-left { text-align: left; }
+.mb-4 { margin-bottom: 1rem; }
+.pl-4 { padding-left: 1rem; }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(1rem * var(--tw-space-y-reverse)); }
+.p-4 { padding: 1rem; }
+.rounded-lg { border-radius: 0.5rem; }
+.flex-col { flex-direction: column; }
+.gap-4 { gap: 1rem; }
+.text-white\/70 { color: rgba(255, 255, 255, 0.7); }
+.transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.text-white\/80 { color: rgba(255, 255, 255, 0.8); }
+.text-white { color: #fff; }
+.my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+.mb-12 { margin-bottom: 3rem; }
+.max-w-6xl { max-width: 72rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-3xl { max-width: 48rem; }
+.mb-8 { margin-bottom: 2rem; }
+.w-32 { width: 8rem; }
+.h-32 { height: 8rem; }
+.bg-white\/90 { background-color: rgba(255, 255, 255, 0.9); }
+.p-2 { padding: 0.5rem; }
+.text-black { color: #000; }
+.inline-flex { display: inline-flex; }
+.gap-2 { gap: 0.5rem; }
+.text-white\/60 { color: rgba(255, 255, 255, 0.6); }
+.flex-shrink-0 { flex-shrink: 0; }
+.self-start { align-self: flex-start; }
+.text-white\/40 { color: rgba(255, 255, 255, 0.4); }
+
 
 /* 响应式调整 */
 @media (min-width: 640px) { /* sm */
+    header h1 { font-size: 1.25rem; } /* sm:text-xl */
     header a { font-size: 0.875rem; } /* sm:text-sm */
+    .md\:text-2xl { font-size: 1.5rem; } /* md:text-2xl */
+    .text-xl { font-size: 1.25rem; } /* sm:text-xl for general text-xl */
+
     section .sm\:flex-row { flex-direction: row; }
     section .sm\:justify-between { justify-content: space-between; }
     section .sm\:items-center { align-items: center; }
@@ -186,88 +184,17 @@ section .flex-shrink-0 { flex-shrink: 0; }
     section .md\:text-5xl { font-size: 3rem; }
     section .md\:text-7xl { font-size: 4.5rem; }
     section .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .container { margin: 20px; padding: 15px; } /* 通用容器在小屏幕下调整 */
-    h1 { font-size: 1.8em; } /* 通用h1在小屏幕下调整 */
-    .universal-footer .footer-title { font-size: 1.1em; } /* 页脚标题调整 */
+    .container { max-width: 960px; } /* 确保md尺寸下容器宽度 */
     .universal-footer .portal-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
 }
 @media (min-width: 1024px) { /* lg */
     header .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
     section .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .container { max-width: 1200px; } /* 主域可能更宽，这里调整为1200px */
 }
 @media (max-width: 480px) { /* 针对更小屏幕 */
     .container { margin: 10px; padding: 10px; }
     h1 { font-size: 1.5em; }
     .universal-footer .portal-grid { grid-template-columns: 1fr; padding: 0 5px; }
     .universal-footer .portal-item { padding: 12px; }
-}
-
-
-/* Universal Footer Styles (从之前版本中优化并移入common.css) */
-.universal-footer {
-    background-color: #2c3e50; /* 深色背景 */
-    color: #ecf0f1; /* 浅色文字 */
-    padding: 30px 20px;
-    text-align: center;
-    border-top: 1px solid #34495e;
-    margin-top: 50px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.universal-footer .footer-title {
-    font-size: 1.3em;
-    margin-bottom: 20px;
-    color: #EAEAEA; /* 与主题强调色保持一致 */
-    font-weight: bold;
-}
-
-.universal-footer .portal-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto 30px auto;
-    padding: 0 10px;
-}
-
-.universal-footer .portal-item {
-    background-color: #3e4a5d; /* 略浅于页脚背景色 */
-    border-radius: 6px;
-    padding: 15px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.universal-footer .portal-item:hover {
-    background-color: #4a5c70; /* 悬停颜色 */
-    transform: translateY(-5px);
-}
-
-.universal-footer .portal-item a {
-    color: #EAEAEA; /* 与主题强调色保持一致 */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-    display: block;
-    padding: 5px 0;
-    transition: color 0.2s ease;
-}
-
-.universal-footer .portal-item a:hover {
-    color: #ffffff; /* 悬停亮白色 */
-}
-
-.universal-footer .portal-item p {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.7); /* 描述文字颜色 */
-    margin-top: 5px;
-    text-align: center;
-    line-height: 1.5;
-}
-
-.universal-footer .copyright {
-    margin-top: 25px;
-    font-size: 0.85em;
-    color: rgba(255,255,255,0.5); /* 版权文字颜色 */
 }
