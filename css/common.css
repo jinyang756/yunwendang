@@ -11,11 +11,14 @@
     --color-card-bg: rgba(255, 255, 255, 0.03); /* 卡片背景色 */
     --color-border-light: rgba(255, 255, 255, 0.1); /* 轻边框颜色 */
     --color-border-accent-default: #EAEAEA; /* 默认强调色边框 */
-    --color-footer-bg: #2c3e50; /* 页脚背景色 */
-    --color-footer-border: #34495e; /* 页脚边框色 */
-    --color-footer-item-bg: #3e4a5d; /* 页脚项背景色 */
-    --color-footer-item-hover: #4a5c70; /* 页脚项悬停色 */
-    --color-footer-link: #EAEAEA; /* 页脚链接色 (默认强调色) */
+    
+    /* 主域页脚强调色和背景色，覆盖通用页脚变量 */
+    --color-footer-bg: #1a1a2e; /* 页脚使用主域的更深主题色 */
+    --color-footer-border: #2e3b55; /* 页脚使用主域的边框色 */
+    --color-footer-item-bg: #2b3a4f; /* 页脚项背景色 */
+    --color-footer-item-hover: #3d4e64; /* 页脚项悬停色 */
+    --color-footer-link: #8BE9FD; /* 页脚链接色与主域强调色一致 */
+
 
     /* 通用强调色（可根据具体页面主题覆盖） */
     --color-accent: #EAEAEA; /* 默认强调色，用于通用按钮和标题 */
@@ -33,11 +36,24 @@
 
 /* 全局基础样式 - 使用变量 */
 body {
+    font-family: 'Inter', 'Noto Serif SC', serif;
+    line-height: 1.8;
     color: var(--color-primary-text);
     background-color: var(--color-dark-bg);
-    /* Antialiased 字体平滑处理 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* 通用布局容器 - 使用变量 */
+.container {
+    max-width: 960px; /* 默认容器宽度 */
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
 }
 
 /* 统一字体大小和字重规范 */
@@ -50,12 +66,6 @@ p { font-size: 1.125rem; font-weight: 400; } /* text-lg */
 .text-xs { font-size: 0.75rem; }
 
 
-/* 通用布局容器 - 使用变量 */
-.container {
-    background-color: rgba(0,0,0,0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
 /* 通用标题样式 - 使用变量 */
 h1, h2, h3, h4 { color: var(--color-primary-text); }
 p { color: var(--color-secondary-text); }
@@ -63,7 +73,7 @@ p { color: var(--color-secondary-text); }
 /* 通用强调色 - 使用变量 */
 .text-accent { color: var(--color-accent); }
 .border-accent { border-color: var(--color-accent); }
-.hover-accent:hover { background-color: var(--color-accent); color: var(--color-dark-bg); } /* 悬停颜色反转 */
+.hover-accent:hover { background-color: var(--color-accent); color: var(--color-dark-bg); }
 
 /* 通用背景区块 - 使用变量 */
 .bg-dark-section { background-color: var(--color-dark-section-bg); }
@@ -78,8 +88,8 @@ p { color: var(--color-secondary-text); }
     width: fit-content;
     margin: 30px auto;
     padding: 12px 25px;
-    background-color: transparent; /* 默认透明 */
-    border: 1px solid var(--color-accent); /* 边框使用强调色 */
+    background-color: transparent;
+    border: 1px solid var(--color-accent);
     color: var(--color-accent);
     text-decoration: none;
     border-radius: 5px;
@@ -87,7 +97,6 @@ p { color: var(--color-secondary-text); }
     font-weight: bold;
     cursor: pointer;
 }
-
 .cta-button:hover {
     background-color: var(--color-accent);
     color: var(--color-dark-bg);
@@ -96,59 +105,52 @@ p { color: var(--color-secondary-text); }
 
 /* 优化后的顶部导航栏样式 */
 .main-nav {
-    position: fixed; /* 固定在顶部 */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem; /* py-4 px-6 */
-    background-color: rgba(0, 0, 0, 0.6); /* 更深的半透明背景 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* 增加阴影 */
-    z-index: 100; /* 确保在所有内容之上 */
+    padding: 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
 }
-
 .main-nav .logo-area {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: var(--color-primary-text);
     transition: opacity 0.3s ease;
-    flex-shrink: 0; /* 防止Logo区域被挤压 */
+    flex-shrink: 0;
 }
-
-.main-nav .logo-area:hover {
-    opacity: 0.8;
-}
-
+.main-nav .logo-area:hover { opacity: 0.8; }
 .main-nav .subdomain-header-logo {
-    height: 45px; /* 增大Logo高度 */
-    margin-right: 12px; /* 增大间距 */
+    height: 45px;
+    margin-right: 12px;
 }
-
 .main-nav .subdomain-header-title {
-    font-size: 1.75rem; /* 增大标题字体 */
+    font-size: 1.75rem;
     font-weight: 700;
-    color: var(--color-accent); /* 子域标题使用强调色 */
-    white-space: nowrap; /* 防止标题换行 */
+    color: var(--color-accent);
+    white-space: nowrap;
 }
 
 /* 汉堡包菜单按钮 */
 .menu-toggle {
-    display: flex; /* 确保在小屏幕上可见 */
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 35px; /* 增大点击区域 */
-    height: 30px; /* 增大点击区域 */
+    width: 35px;
+    height: 30px;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 110; /* 确保在菜单内容和头部之上 */
-    position: relative; /* 确保自身定位 */
+    z-index: 110;
+    position: relative;
 }
-
 .menu-toggle .bar {
     width: 100%;
     height: 3px;
@@ -156,62 +158,44 @@ p { color: var(--color-secondary-text); }
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
 }
-
-/* 菜单打开时的动画 */
-.menu-toggle.open .bar:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
-}
-.menu-toggle.open .bar:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.open .bar:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-}
+.menu-toggle.open .bar:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.menu-toggle.open .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.open .bar:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
 /* 侧边或全屏导航菜单 */
 .nav-menu {
     position: fixed;
     top: 0;
-    right: -100%; /* 初始隐藏在右侧 */
-    width: 100%; /* 全屏宽度 */
+    right: -100%;
+    width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95); /* 更深的半透明黑色背景 */
+    background-color: rgba(0, 0, 0, 0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease-in-out; /* 增加动画弹性效果 */
-    z-index: 105; /* 在汉堡包按钮之下，内容之上 */
-    overflow-y: auto; /* 如果内容过多可滚动 */
-    padding-top: 80px; /* 留出顶部导航栏的空间 */
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease-in-out;
+    z-index: 105;
+    overflow-y: auto;
+    padding-top: 80px;
 }
-
-.nav-menu.open {
-    right: 0;
-    opacity: 1;
-}
-
+.nav-menu.open { right: 0; opacity: 1; }
 .nav-menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
     text-align: center;
-    width: 80%; /* 菜单内容宽度 */
-    max-width: 400px; /* 限制最大宽度 */
+    width: 80%;
+    max-width: 400px;
 }
-
 .nav-menu ul li {
-    margin: 15px 0; /* 调整间距 */
-    opacity: 0; /* 初始隐藏，用于动画 */
-    transform: translateX(50px); /* 初始向右偏移 */
+    margin: 15px 0;
+    opacity: 0;
+    transform: translateX(50px);
     transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
-
-.nav-menu.open ul li {
-    opacity: 1; /* 打开时淡入 */
-    transform: translateX(0); /* 滑入 */
-}
+.nav-menu.open ul li { opacity: 1; transform: translateX(0); }
 .nav-menu.open ul li:nth-child(1) { transition-delay: 0.1s; }
 .nav-menu.open ul li:nth-child(2) { transition-delay: 0.15s; }
 .nav-menu.open ul li:nth-child(3) { transition-delay: 0.2s; }
@@ -221,100 +205,125 @@ p { color: var(--color-secondary-text); }
 .nav-menu.open ul li:nth-child(7) { transition-delay: 0.4s; }
 .nav-menu.open ul li:nth-child(8) { transition-delay: 0.45s; }
 .nav-menu.open ul li:nth-child(9) { transition-delay: 0.5s; }
-
-
 .nav-menu ul li a {
-    font-size: 1.8em; /* 导航项大字体 */
+    font-size: 1.8em;
     color: var(--color-primary-text);
     text-decoration: none;
-    padding: 10px 20px; /* 增大点击区域 */
-    display: block; /* 确保整个区域可点击 */
+    padding: 10px 20px;
+    display: block;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .nav-menu ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* 悬停背景 */
-    color: var(--color-accent); /* 悬停强调色 */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-accent);
 }
 
-/* Universal Footer Styles (从之前版本中优化并移入common.css) */
+/* --- Universal Footer Styles (根据主域代码精确调整) --- */
 .universal-footer {
-    background-color: var(--color-footer-bg); /* 使用变量 */
-    color: var(--color-primary-text); /* 使用通用变量 */
-    padding: 20px 15px; /* 缩小内边距，减少占位 */
+    background-color: var(--color-footer-bg);
+    color: var(--color-primary-text);
+    padding: 30px 20px;
     text-align: center;
-    border-top: 1px solid var(--color-footer-border); /* 使用变量 */
+    border-top: 1px solid var(--color-footer-border);
     margin-top: 50px;
     width: 100%;
     box-sizing: border-box;
 }
 
 .universal-footer .footer-title {
-    font-size: 1.1em; /* 缩小标题字体 */
-    margin-bottom: 15px; /* 缩小间距 */
-    color: var(--color-accent); /* 使用通用强调色 */
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    color: var(--color-footer-link);
     font-weight: bold;
 }
 
 .universal-footer .portal-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 缩小最小宽度 */
-    gap: 15px; /* 缩小间距 */
-    max-width: 900px; /* 缩小最大宽度 */
-    margin: 0 auto 20px auto; /* 缩小外边距 */
-    padding: 0 5px; /* 缩小内边距 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+    padding: 0 10px;
 }
 
 .universal-footer .portal-item {
-    background-color: var(--color-footer-item-bg); /* 使用变量 */
-    padding: 12px; /* 缩小内边距 */
+    background-color: var(--color-footer-item-bg);
+    border-radius: 6px;
+    padding: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .universal-footer .portal-item:hover {
-    background-color: var(--color-footer-item-hover); /* 使用变量 */
+    background-color: var(--color-footer-item-hover);
+    transform: translateY(-5px);
 }
 
 .universal-footer .portal-item a {
-    font-size: 1em; /* 缩小链接字体 */
-    color: var(--color-footer-link); /* 使用变量 */
-    padding: 3px 0; /* 缩小内边距 */
+    color: var(--color-footer-link);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: block;
+    padding: 8px 0;
+    border: 1px solid var(--color-footer-link);
+    border-radius: 5px;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
+}
+
+.universal-footer .portal-item a.cursor-not-allowed {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: transparent !important;
+    color: var(--color-footer-link) !important;
+    border-color: var(--color-footer-link) !important;
+}
+.universal-footer .portal-item a.hover-accent:hover {
+    background-color: var(--color-footer-link);
+    color: var(--color-dark-bg);
+}
+
+.universal-footer .portal-item a:hover {
+    color: #ffffff;
 }
 
 .universal-footer .portal-item p {
-    font-size: 0.8em; /* 缩小描述文字字体 */
-    color: var(--color-secondary-text); /* 使用通用变量 */
-    margin-top: 3px; /* 缩小间距 */
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.7);
+    margin-top: 5px;
+    text-align: center;
+    line-height: 1.5;
 }
 
 .universal-footer .copyright {
-    margin-top: 15px; /* 缩小间距 */
-    font-size: 0.8em; /* 缩小字体 */
-    color: var(--color-faded-text); /* 使用通用变量 */
+    margin-top: 25px;
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.5);
 }
 
-/* 响应式调整 - 针对新导航和页脚调整 */
-@media (min-width: 640px) { /* sm */
-    .main-nav .subdomain-header-title { font-size: 1.75rem; }
-    .nav-menu ul li a { font-size: 2em; }
-    .universal-footer { padding: 25px 20px; }
-    .universal-footer .portal-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container { margin: 20px; padding: 15px; }
+    h1 { font-size: 1.8em; }
+    .hero-section h2 { font-size: 3em; }
+    .hero-section p { font-size: 1em; }
+    .universal-footer .footer-title { font-size: 1.1em; }
+    .universal-footer .portal-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+    /* 模态框响应式调整 */
+    #star-manual-modal .modal-content { width: 95%; padding: 20px; }
 }
-@media (min-width: 768px) { /* md */
-    .main-nav .subdomain-header-title { font-size: 2rem; } /* md:text-3xl */
-    .nav-menu ul li a { font-size: 2.2em; }
-    .universal-footer .footer-title { font-size: 1.2em; }
-    .universal-footer .portal-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-}
-@media (min-width: 1024px) { /* lg */
-    .main-nav .subdomain-header-title { font-size: 2.25rem; } /* lg:text-4xl */
-    .nav-menu ul li a { font-size: 2.5em; }
-    .universal-footer .portal-grid { max-width: 1000px; }
-}
-@media (max-width: 480px) { /* 针对更小屏幕 */
-    .main-nav .subdomain-header-logo { height: 40px; }
-    .main-nav .subdomain-header-title { font-size: 1.5rem; }
-    .nav-menu ul li a { font-size: 1.5em; }
+
+@media (max-width: 480px) {
+    .container { margin: 10px; padding: 10px; }
+    h1 { font-size: 1.5em; }
+    .hero-section h2 { font-size: 2.5em; }
+    .hero-section p { font-size: 0.9em; }
     .universal-footer .portal-grid { grid-template-columns: 1fr; }
+    .universal-footer .portal-item { padding: 12px; }
+    /* 模态框响应式调整 */
+    #star-manual-modal .modal-content { padding: 15px; }
+    #star-manual-modal .modal-close-button { font-size: 24px; top: 10px; right: 15px; }
 }
 
 /* 通用 Tailwind CSS 兼容性类 */
@@ -407,6 +416,11 @@ p { color: var(--color-secondary-text); }
 @media (max-width: 480px) { /* 针对更小屏幕 */
     .container { margin: 10px; padding: 10px; }
     h1 { font-size: 1.5em; }
-    .universal-footer .portal-grid { grid-template-columns: 1fr; padding: 0 5px; }
+    .hero-section h2 { font-size: 2.5em; }
+    .hero-section p { font-size: 0.9em; }
+    .universal-footer .portal-grid { grid-template-columns: 1fr; }
     .universal-footer .portal-item { padding: 12px; }
+    /* 模态框响应式调整 */
+    #star-manual-modal .modal-content { padding: 15px; }
+    #star-manual-modal .modal-close-button { font-size: 24px; top: 10px; right: 15px; }
 }
